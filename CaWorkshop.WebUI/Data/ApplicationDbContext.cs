@@ -17,5 +17,8 @@ namespace CaWorkshop.WebUI.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<TodoList> TodoLists { get; set; }
     }
 }

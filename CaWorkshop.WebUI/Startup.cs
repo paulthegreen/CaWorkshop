@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CaWorkshop.Application;
 using CaWorkshop.Infrastructure;
+using CaWorkshop.WebUI.Filters;
 
 namespace CaWorkshop.WebUI
 {
@@ -21,9 +22,13 @@ namespace CaWorkshop.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
-            services.AddApplication();
+            services.AddApplication(Configuration);
+
+            services.AddControllersWithViews(options =>
+                options.Filters.Add(new ApiExceptionFilter()));
 
             services.AddControllersWithViews();
+
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
